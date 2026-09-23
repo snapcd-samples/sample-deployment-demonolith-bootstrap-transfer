@@ -1,0 +1,76 @@
+// The defaults below work out of the box against the pre-configured
+// "snapcd-selfhosted-deployment-docker", matching ../../sample-deployment.
+
+//// Needed to init provider
+variable "client_id" {
+  default = "default"
+}
+variable "client_secret" {
+  default   = "default"
+  sensitive = true
+}
+variable "organization_id" {
+  default = "10000000-0000-0000-0000-000000000000"
+}
+
+variable "insecure_skip_verify" {
+  default = true
+  // set to false if server has valid certifcate; e.g. if snapcd_server_url==https://snapcd.io
+}
+variable "snapcd_server_url" {
+  default = "http://localhost:5000"
+  // The URL you use to reach the Snap CD Server from where you run `tofu apply`.
+  // - snapcd-deployment-docker: "http://localhost:5000"
+  // - SnapCd.Server.Host (C# project): "https://localhost:20002"
+  // - SaaS subscription: "https://snapcd.io"
+}
+
+
+//// The deployment
+
+variable "snapcd_server_url_from_runner" {
+  default = "http://snapcd-server:5000"
+  // The URL the Runner uses to reach the Snap CD Server. This is used in the
+  // State Store backend config — OpenTofu runs inside the Runner container, so
+  // the URL must be reachable from there (e.g. a Docker network hostname).
+  // - snapcd-deployment-docker: "http://snapcd-server:5000"
+  // - SnapCd.Server.Host (C# project): "https://localhost:20002"
+  // - SaaS subscription: "https://snapcd.io"
+}
+variable "runner_name" {
+  default = "default"
+}
+variable "stack_name" {
+  default = "default"
+}
+variable "namespace_name" {
+  default = "sample-deployment-demonolith-bootstrap-transfer"
+}
+variable "source_module_name" {
+  default = "app"
+  // The root the marked resources leave. Also the key its state is stored
+  // under, via SNAPCD_MODULE_NAME.
+}
+variable "receiver_module_name" {
+  default = "networking"
+  // The root they arrive in, and the key its own state is stored under.
+}
+
+variable "source_url" {
+  default = "https://github.com/snapcd-samples/sample-deployment-demonolith-bootstrap-transfer.git"
+}
+variable "branch_name" {
+  default = "main"
+  // The branch Snap CD deploys. Switch it to redeploy both modules from
+  // another branch; a prove round runs a ref of its own without changing this.
+}
+variable "engine" {
+  default = "OpenTofu"
+}
+
+
+//// The roots' own inputs
+
+variable "release_words" {
+  default = "2"
+}
