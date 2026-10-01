@@ -8,3 +8,11 @@ resource "random_pet" "vpc_name" {
 
 resource "random_uuid" "private_subnet_id" {
 }
+
+resource "random_pet" "dns_zone" {
+  length = 2
+}
+
+resource "random_uuid" "dns_zone_id" {
+}
+

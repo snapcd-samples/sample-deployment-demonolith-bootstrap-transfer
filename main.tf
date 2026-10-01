@@ -92,3 +92,12 @@ resource "snapcd_module_input_from_literal" "app_params" {
   input_kind    = "Param"
   type          = "String"
 }
+
+resource "snapcd_module_input_from_output" "app_random_pet_dns_zone" {
+  input_kind       = "Param"
+  module_id        = snapcd_module.app.id
+  name             = "random_pet_dns_zone"
+  output_module_id = snapcd_module.networking.id
+  output_name      = "random_pet_dns_zone"
+}
+

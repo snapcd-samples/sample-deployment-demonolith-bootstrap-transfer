@@ -3,3 +3,9 @@ variable "release_words" {
   type        = number
   default     = 2
 }
+
+variable "random_pet_dns_zone" {
+  type        = string
+  description = "Upstream input from module \"../networking\" output \"random_pet_dns_zone\""
+}
+

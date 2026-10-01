@@ -12,14 +12,7 @@ resource "random_pet" "release_name" {
 }
 
 resource "random_pet" "endpoint_name" {
-  prefix = random_pet.dns_zone.id
+  prefix = var.random_pet_dns_zone
 }
 
-# @demono:transfer
-resource "random_pet" "dns_zone" {
-  length = 2
-}
 
-# @demono:transfer
-resource "random_uuid" "dns_zone_id" {
-}

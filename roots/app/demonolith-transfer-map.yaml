@@ -1,0 +1,32 @@
+version: 2
+created: "2026-10-01T18:28:54Z"
+tool: demonolith dev
+source_dir: app
+receiver_dir: ../networking
+receiver:
+    blocks:
+        - random_pet.dns_zone
+        - random_uuid.dns_zone_id
+    moves:
+        - random_pet.dns_zone
+        - random_uuid.dns_zone_id
+    outputs:
+        - random_pet_dns_zone
+    file_checksums:
+        main.tf: 97ad84af36e5f9a27eb2afd3e96ea940accbe5de0b42dfdade2f7cd6757339aa
+        outputs.tf: 9adff471089624ec3cb46b7b62ae9a6c9d4a76db85b037aabdb94a95e4409fb6
+cross_edges:
+    - consumer: source
+      input: random_pet_dns_zone
+      producer: ../networking
+      output: random_pet_dns_zone
+source_file_checksums:
+    main.tf: f9f1cbade64e9cb77db4b89e1cbd354e5143b55a9cc488dd47ab971d7ff1d3f9
+    variables.tf: 8e27557f9cd6353cdf3017e85af72d8c139c546f7a12bbfe25a8ac6a9e6ae0e5
+snapcd:
+    dir: ..
+    modules:
+        ../networking: networking
+        source: app
+    file_checksums:
+        main.tf: c772634c46a623ea14d08e8d6c6415ede89c256ff12181e3997623fb2b856779
